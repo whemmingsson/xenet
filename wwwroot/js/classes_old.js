@@ -20,6 +20,10 @@ class RGBColor {
     get B() {
         return this._b;
     }
+
+    setFill(){
+      fill(this.R,this.G,this.B);
+    }
   }
   
   /////////////////////////////
@@ -32,16 +36,26 @@ class RGBColor {
       this._x = x;
       this._y = y;
       this._color = color;
+      this._isMouseHover = false;
+    }
+
+    mouseOver(mouse_X, mouse_Y) {
+       if(dist(mouse_X, mouse_Y, this._x, this._y) < this._radius) {
+        this._isMouseHover = true;     
+      }   
+      else {
+        this._isMouseHover = false;        
+      }
+
+      return this._isMouseHover;
     }
   
     render() {
-  
-     fill(
-        this._color.R, 
-        this._color.G, 
-        this._color.B
-      );
-  
-     ellipse(this._x, this._y, this._radius*2, this._radius*2);
+      if(!this._isMouseHover)
+        this._color.setFill();
+      else
+        hoverColor.setFill();
+
+      ellipse(this._x, this._y, this._radius*2, this._radius*2);
     }
   }

@@ -13,20 +13,24 @@ let playerPieces = [];
 let playerOnePieces = []; // To be used later
 let playerTwoPieces = []; // To be used later
 
-const playerOneColor = new RGBColor(225,25,25);
-const playerTwoColor = new RGBColor(25,25,225);
+const playerOneColor = new RGBColor(220,220,220);
+const playerTwoColor = new RGBColor(25,25,25);
+
+// Color when mouse is over a piece
+const hoverColor = new RGBColor(50,50,220);
 
 // SETUP: Run ONCE
 function setup() {
-  createCanvas(2000, 600);
+  var canvas = createCanvas(2000, 600);
+  canvas.parent('sketch-holder');
   createPieces();
 }
 
-// DRAW: Run EVERY FRAME
+// DRAW: Run EVERY FRAME UPDATE
 function draw() {
   background(100);
   drawGrid();
-  drawPieces();
+  handlePieces();
 }
 
 function createPieces() {    
@@ -68,8 +72,20 @@ function drawGrid(){
   }
 }
 
-function drawPieces() {
+function handlePieces() {
+  var isMouseOver = false;
+
   playerPieces.forEach(element => {
-      element.render();
+    var currentMouseOver = element.mouseOver(mouseX, mouseY);
+
+    if(currentMouseOver)
+      isMouseOver = true;
+
+    element.render();
   });
+
+  if(isMouseOver)
+    cursor(HAND);
+  else
+    cursor(ARROW);
 }
