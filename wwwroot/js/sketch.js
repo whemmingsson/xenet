@@ -4,8 +4,9 @@
 ///////////////////////////////
 
 // Globals
-const c_squareSide = 160;
-const c_pathHeight = 40;
+const c_squareSide = 140;
+const c_pieceRadius = c_squareSide / 2 * 0.85;
+const c_pathHeight = c_squareSide/4;
 
 let playerPieces = [];
 let playerOnePieces = []; // To be used later
@@ -61,7 +62,7 @@ function squareRenderer(square){
     else
       fill(50);
 
-    ellipse(0,0, 100,100);
+    ellipse(0,0,c_pieceRadius*2,c_pieceRadius*2);
   }
 
   noStroke();
@@ -73,7 +74,7 @@ function squareRenderer(square){
     //hoverColor.setFill();
     noFill();
     //rect(0,0, c_squareSide, c_squareSide);
-    ellipse(0,0, 100,100);
+    ellipse(0,0, c_pieceRadius*2,c_pieceRadius*2);
   }
 
   rectMode(CORNER);
