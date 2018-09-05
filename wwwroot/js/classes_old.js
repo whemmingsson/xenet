@@ -3,10 +3,11 @@
 /////////////////////
 
 class RGBColor {
-    constructor(r,g,b) {
+    constructor(r,g,b,a) {
       this._r = r;
       this._g = g;
       this._b = b;
+      this._a = a;
     }
 
     get R() {
@@ -21,8 +22,12 @@ class RGBColor {
         return this._b;
     }
 
+    get A() {
+      return this._a;
+  }
+
     setFill(){
-      fill(this.R,this.G,this.B);
+      fill(this.R,this.G,this.B, this.A );
     }
   }
   

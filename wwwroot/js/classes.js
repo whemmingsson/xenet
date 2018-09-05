@@ -14,11 +14,12 @@ class XPosition{
 }
 
 class XSquare {
-    constructor(position, rendererFunc){
-        this._player = -1;
+    constructor(position, player, rendererFunc, angle){
+        this._player = player;
         this._position = position; // Position represents the x, y coordinates within the gameboard, rangeing from 0,0 to 2,9
         this._rendererFunc = rendererFunc; // Inject the renderer to separate game logic from rendering
         this._isMouseOver = false;
+        this._angle = angle; // Do we really need this here?
     }
 
     get isMouseOver(){
@@ -31,6 +32,10 @@ class XSquare {
 
     get pos(){
         return this._position;
+    }
+
+    get player(){
+        return this._player;
     }
 
     render(){
@@ -52,7 +57,8 @@ class XBoard {
     }
 
     selectSquare(pos){
-        var arrayPos = pos.x + pos.y * this._width;
+
+        var arrayPos = this.getArrayPosition(pos);
 
         if(pos.x >= this._width || pos.y >= this._height || pos.x < 0 || pos.y < 0) {
             if(this._hoverSquare != null) {
@@ -75,6 +81,13 @@ class XBoard {
 
         this._hoverSquare = s;
         return true;
+    }
+
+    getArrayPosition(pos) {
+        if( pos.y != 1)
+            return pos.x + pos.y * this._width;
+        else
+            return this._width - pos.x - 1 + (pos.y * this._width)
     }
 
     render(){
